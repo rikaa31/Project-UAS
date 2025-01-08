@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar Pengaduan</title>
+  <style>
+    /* Gaya umum untuk halaman */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9; /* Warna latar belakang yang lembut */
+      color: #333;
+    }
+
+    /* Gaya untuk header */
+    h1 {
+      background-color: #6c63ff; /* Warna ungu lembut */
+      color: white;
+      padding: 20px 0;
+      margin: 0;
+      font-size: 36px;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Gaya untuk navbar */
+    .navbar {
+      background-color: #fff;
+      padding: 10px 0;
+      display: flex;
+      justify-content: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #0d00ff;
+      font-size: 18px;
+      transition: color 0.3s;
+    }
+
+    .navbar a:hover {
+      color: #333;
+    }
+
+    /* Gaya untuk daftar pengaduan */
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .list-group-item {
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      background-color: #fefefe;
+    }
+
+    .list-group-item strong {
+      color: #6c63ff;
+    }
+
+    .list-group-item small {
+      color: #777;
+    }
+    /* Media Query untuk perangkat dengan lebar maksimum 768px (tablet dan hp) */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 28px; /* Ukuran font header lebih kecil */
+    padding: 15px 0; /* Padding lebih kecil */
+  }
+
+  .navbar {
+    flex-direction: column; /* Navbar ditampilkan secara vertikal */
+    align-items: center;
+    padding: 15px 0;
+  }
+
+  .navbar a {
+    margin: 5px 0; /* Margin antar tautan lebih kecil */
+    font-size: 16px; /* Ukuran font tautan lebih kecil */
+  }
+
+  .container {
+    margin: 20px auto; /* Margin lebih kecil untuk perangkat kecil */
+    padding: 15px; /* Padding lebih kecil */
+  }
+
+  .list-group-item {
+    padding: 10px; /* Padding lebih kecil */
+    font-size: 14px; /* Ukuran font lebih kecil */
+  }
+
+  .list-group-item strong {
+    font-size: 16px; /* Ukuran font judul tetap lebih besar */
+  }
+}
+
+/* Media Query untuk perangkat dengan lebar maksimum 480px (hp kecil) */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 24px; /* Ukuran font header lebih kecil */
+    padding: 10px 0; /* Padding lebih kecil */
+  }
+
+  .navbar {
+    flex-direction: column; /* Navbar tetap vertikal */
+    align-items: center;
+    padding: 10px 0;
+  }
+
+  .navbar a {
+    font-size: 14px; /* Ukuran font tautan lebih kecil */
+  }
+
+  .container {
+    padding: 10px; /* Padding lebih kecil */
+  }
+
+  .list-group-item {
+    padding: 8px; /* Padding lebih kecil */
+    font-size: 12px; /* Ukuran font lebih kecil */
+  }
+
+  .list-group-item strong {
+    font-size: 14px; /* Ukuran font judul tetap lebih besar */
+  }
+}
+
+  </style>
+</head>
+<body>
+  <h1>Form Pengaduan</h1>
+  <div class="navbar">
+    <a href="index.html">Form Pengaduan</a>
+    <a href="daftarpengaduan.html">Daftar Pengaduan</a>
+    <a href="filter.html">Filter Pengaduan</a>
+  </div>
+
+        <div class="mt-4">
+            <label for="filterJudul" class="form-label">Filter Judul Pengaduan</label>
+            <input type="text" class="form-control" id="filterJudul" oninput="filterPengaduan()">
+        </div>
+
+        <div id="filteredPengaduan" class="mt-4"></div>
+    </div>
+
+    <script>
+        // Menampilkan pengaduan yang sudah difilter
+        window.onload = function() {
+            document.getElementById('filterJudul').addEventListener('input', function() {
+                filterPengaduan();
+            });
+        };
+
+        function filterPengaduan() {
+            let pengaduanList = JSON.parse(localStorage.getItem('pengaduanList')) || [];
+            let filterValue = document.getElementById('filterJudul').value.toLowerCase();
+            let filtered = pengaduanList.filter(pengaduan => pengaduan.judul.toLowerCase().includes(filterValue));
+
+            let filteredPengaduan = document.getElementById('filteredPengaduan');
+            filteredPengaduan.innerHTML = '<h5>Hasil Filter:</h5>';
+            filtered.forEach(pengaduan => {
+                filteredPengaduan.innerHTML += `
+                    <div class="alert alert-info">
+                        <strong>${pengaduan.judul}</strong><br>${pengaduan.isi}
+                    </div>
+                `;
+            });
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

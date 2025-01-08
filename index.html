@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Pengaduan</title>
+  <style>
+    /* Gaya umum untuk halaman */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9; /* Warna latar belakang yang lembut */
+      color: #333;
+    }
+
+    /* Gaya untuk header */
+    h1 {
+      background-color: #6c63ff; /* Warna ungu lembut */
+      color: white;
+      padding: 20px 0;
+      margin: 0;
+      font-size: 36px;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Gaya untuk navbar */
+    .navbar {
+      background-color: #fff;
+      padding: 10px 0;
+      display: flex;
+      justify-content: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #0d00ff;
+      font-size: 18px;
+      transition: color 0.3s;
+    }
+
+    .navbar a:hover {
+      color: #333;
+    }
+
+    /* Gaya untuk form */
+    .form-container {
+      max-width: 600px;
+      margin: 40px auto;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-container label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    .form-container input, .form-container textarea, .form-container button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .form-container input:focus, .form-container textarea:focus {
+      border-color: #6c63ff;
+      outline: none;
+    }
+
+    .form-container button {
+      background-color: #6c63ff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      transition: background-color 0.3s;
+    }
+
+    .form-container button:hover {
+      background-color: #5548c8;
+    }
+    /* Media Query untuk perangkat dengan lebar maksimum 768px (tablet dan hp) */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 28px; /* Ukuran font header lebih kecil */
+    padding: 15px 0; /* Padding lebih kecil */
+  }
+
+  .navbar {
+    flex-direction: column; /* Navbar ditampilkan secara vertikal */
+    align-items: center;
+    padding: 15px 0;
+  }
+
+  .navbar a {
+    margin: 5px 0; /* Margin antar tautan lebih kecil */
+    font-size: 16px; /* Ukuran font tautan lebih kecil */
+  }
+
+  .container {
+    margin: 20px auto; /* Margin lebih kecil untuk perangkat kecil */
+    padding: 15px; /* Padding lebih kecil */
+  }
+
+  .list-group-item {
+    padding: 10px; /* Padding lebih kecil */
+    font-size: 14px; /* Ukuran font lebih kecil */
+  }
+
+  .list-group-item strong {
+    font-size: 16px; /* Ukuran font judul tetap lebih besar */
+  }
+}
+
+/* Media Query untuk perangkat dengan lebar maksimum 480px (hp kecil) */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 24px; /* Ukuran font header lebih kecil */
+    padding: 10px 0; /* Padding lebih kecil */
+  }
+
+  .navbar {
+    flex-direction: column; /* Navbar tetap vertikal */
+    align-items: center;
+    padding: 10px 0;
+  }
+
+  .navbar a {
+    font-size: 14px; /* Ukuran font tautan lebih kecil */
+  }
+
+  .container {
+    padding: 10px; /* Padding lebih kecil */
+  }
+
+  .list-group-item {
+    padding: 8px; /* Padding lebih kecil */
+    font-size: 12px; /* Ukuran font lebih kecil */
+  }
+
+  .list-group-item strong {
+    font-size: 14px; /* Ukuran font judul tetap lebih besar */
+  }
+}
+
+  </style>
+</head>
+<body>
+  <h1>Form Pengaduan</h1>
+  <div class="navbar">
+    <a href="index.html">Form Pengaduan</a>
+    <a href="daftarpengaduan.html">Daftar Pengaduan</a>
+    <a href="filter.html">Filter Pengaduan</a>
+  </div>
+
+  <div class="form-container">
+    <form id="pengaduanForm">
+      <label for="nama">Nama Lengkap</label>
+      <input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap Anda" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="Masukkan email Anda" required>
+
+      <label for="judul">Judul Pengaduan</label>
+      <input type="text" id="judul" name="judul" placeholder="Masukkan judul pengaduan" required>
+
+      <label for="isi">Isi Pengaduan</label>
+      <textarea id="isi" name="isi" rows="5" placeholder="Masukkan isi pengaduan" required></textarea>
+
+      <button type="submit">Kirim Pengaduan</button>
+    </form>
+  </div>
+
+  <script>
+    // Ambil elemen form
+    const form = document.getElementById('pengaduanForm');
+
+    // Tambahkan event listener saat form dikirim
+    form.addEventListener('submit', function(event) {
+      // Ambil nilai dari setiap input
+      const nama = document.getElementById('nama').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const judul = document.getElementById('judul').value.trim();
+      const isi = document.getElementById('isi').value.trim();
+
+      // Validasi sederhana: pastikan semua input tidak kosong
+      if (!nama || !email || !judul || !isi) {
+        alert('Harap isi semua bidang sebelum mengirim.');
+        event.preventDefault(); // Hentikan pengiriman form
+      } else {
+        alert('Pengaduan berhasil dikirim!');
+      }
+    });
+  </script>
+</body>
+</html>
